@@ -1,15 +1,31 @@
 <section class="hero is-info">
-    <div class="hero-body">
-      <div class="container">
-        <h1 class="title">
-          Welcome to {{title}}
-        </h1>
-        <h2 class="subtitle">
-          ... My first complete Angular app ...
-        </h2>
-      </div>
-    </div>  
-  </section>
-  <section class="container">   
-      <products></products>
+  <div class="hero-body">
+    <div class="container">
+      <h1 class="title">
+        Welcome to {{title}}
+      </h1>
+      <h2 class="subtitle">
+        ... My first complete Angular app ...
+      </h2>
+    </div>
+  </div>
+  <div class="tabs is-boxed is-centered main-menu">
+    <ul>
+      <li>
+        <a [routerLink]="['/welcome']">
+          <span class="icon is-small"><i class="fa fa-home"></i></span>
+          <span>Home</span>
+        </a>
+      </li>
+      <li>
+        <a [routerLink]="['/products']">
+          <span class="icon is-small"><i class="fa fa-list-ul"></i></span>
+          <span>Product List</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+</section>
+<section class="container">
+  <router-outlet></router-outlet>
 </section>

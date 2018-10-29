@@ -22,7 +22,7 @@
         </div>
     </div>
 </section>   
-<div class="columns features"
+<div class="row columns is-multiline"
 *ngIf='filteredProducts && filteredProducts.length'>
     <div class="column is-4"
     *ngFor='let p of filteredProducts'>
@@ -31,7 +31,7 @@
             *ngIf='showImage'>
                 <figure class="image is-square">
                     <img class="is-rounded"
-                    [src]='p.imageURL' 
+                    [src]='p.imageUrl' 
                     [title]='p.productName'
                     [alt]='p.description'>
               </figure>
@@ -41,15 +41,15 @@
                     <div class="media-left">
                         <figure class="image is-48x48">
                                 <img class="is-rounded"
-                                [src]='p.imageURL' 
+                                [src]='p.imageUrl' 
                                 [title]='p.productName | uppercase'
                                 [alt]='p.description'>
                         </figure>
                     </div>
                     <div class="media-content">
-                        <p class="title is-4">{{p.productName}}</p>
+                        <p class="title is-4"><a [routerLink]="['/products', p.productId]">{{p.productName}}</a></p>
                         <p class="subtitle is-6">SKU {{p.productCode | lowercase | convertToSpaces : '-'}}</p>                        
-                        <p class="subtitle is-6">
+                        <p class="star">
                             <star 
                                 [rating]='p.starRating'
                                 (ratingClicked)='onRatingClicked($event)'>

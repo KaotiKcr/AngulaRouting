@@ -10,6 +10,7 @@ import { ProductService } from "./product.service";
 export class ProductListComponent implements OnInit {
   pageTitle: string = "Product List";
   showImage: boolean = false;
+  errorMessage = '';
 
   private _listFilter: string = "";
   get listFilter() {
@@ -24,45 +25,16 @@ export class ProductListComponent implements OnInit {
 
   filteredProducts: IProduct[];
   products: IProduct[] = [];
-  //constructor(private productService: ProductService) {}
+  constructor(private productService: ProductService) {}
   ngOnInit(): void {
-    //this.products = this.productService.getProducts();
-    this.products = [
-        {
-            "productId": 2,
-            "productName":"Gaming PC",
-            "productCode":"KAOTIK-001",
-            "releaseDate":new Date().setDate(new Date().getDate()+0),
-            "description":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nec iaculis mauris.",
-            "price":2032.3,        
-            "starRating":4.2,
-            "imageURL":"http://admin-demo.nopcommerce.com/images/thumbs/0000022_digital-storm-vanquish-3-custom-performance-pc.jpeg",
+    this.productService.getProducts().subscribe(
+      products => {
+        this.products = products;
+        this.filteredProducts = this.products;
+      },
+      error => this.errorMessage = <any>error
+    );    
     
-        },
-        {
-            "productId": 3,
-            "productName":"Night Visions",
-            "productCode":"KAOTIK-003",
-            "releaseDate":new Date().setDate(new Date().getDate()+1),
-            "description":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nec iaculis mauris.",
-            "price":58.3,        
-            "starRating":3.5,
-            "imageURL":"http://admin-demo.nopcommerce.com/images/thumbs/0000065_night-visions.jpeg",
-    
-        },   
-        {
-            "productId": 5,
-            "productName":"Camera Photo",
-            "productCode":"KAOTIK-002",
-            "releaseDate":new Date().setDate(new Date().getDate()+1),
-            "description":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nec iaculis mauris.",
-            "price":388.3,        
-            "starRating":4.5,
-            "imageURL":"http://admin-demo.nopcommerce.com/images/thumbs/0000037_canon-digital-slr-camera-black.jpeg",
-    
-        }    
-    ];
-    this.filteredProducts = this.products;
     this.listFilter = "";
   }
   toggleImage(): void {
