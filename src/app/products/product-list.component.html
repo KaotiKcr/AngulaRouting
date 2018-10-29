@@ -1,0 +1,74 @@
+<section class="hero">
+    <div class="hero-body">
+        <div class="container">
+        <h1 class="title">
+                {{pageTitle}}
+        </h1>
+        <div class="content">
+                <div class="columns">
+                    <div class="column is-6">
+                        <input class="input" type="text" placeholder="Filter by"
+                        [(ngModel)]='listFilter'></div>
+                    
+                </div>
+                <div class="columns">
+            <div class="column is-6"><h4>Filtered by: {{listFilter}}</h4></div>
+                </div>
+                <button class="button"
+                    (click)='toggleImage()'>
+                    {{showImage ? 'Hide' : 'Show'}} Image
+                </button> 
+            </div>
+        </div>
+    </div>
+</section>   
+<div class="columns features"
+*ngIf='filteredProducts && filteredProducts.length'>
+    <div class="column is-4"
+    *ngFor='let p of filteredProducts'>
+        <div class="card is-shady">
+            <div class="card-image" 
+            *ngIf='showImage'>
+                <figure class="image is-square">
+                    <img class="is-rounded"
+                    [src]='p.imageURL' 
+                    [title]='p.productName'
+                    [alt]='p.description'>
+              </figure>
+            </div>
+            <div class="card-content">
+                <div class="media">
+                    <div class="media-left">
+                        <figure class="image is-48x48">
+                                <img class="is-rounded"
+                                [src]='p.imageURL' 
+                                [title]='p.productName | uppercase'
+                                [alt]='p.description'>
+                        </figure>
+                    </div>
+                    <div class="media-content">
+                        <p class="title is-4">{{p.productName}}</p>
+                        <p class="subtitle is-6">SKU {{p.productCode | lowercase | convertToSpaces : '-'}}</p>                        
+                        <p class="subtitle is-6">
+                            <star 
+                                [rating]='p.starRating'
+                                (ratingClicked)='onRatingClicked($event)'>
+                            </star>
+                        </p>
+                    </div>
+                </div>
+          
+                <div class="content">
+                    {{p.description}}
+                    <br>
+                    <span>{{p.releaseDate | amTimeAgo}}</span>                    
+                </div>                
+            </div>
+            <footer class="card-footer">
+                <p href="#" class="card-footer-item"><span>{{p.price | currency:'USD':'symbol'}}</span></p>                    
+                <a href="#" class="card-footer-item">Add to cart</a>
+            </footer>
+          </div>
+
+    </div>
+</div>

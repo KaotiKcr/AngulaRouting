@@ -1,10 +1,10 @@
-import { APMPage } from './app.po';
+import { ApmPage } from './app.po';
 
 describe('apm App', function() {
-  let page: APMPage;
+  let page: ApmPage;
 
   beforeEach(() => {
-    page = new APMPage();
+    page = new ApmPage();
   });
 
   it('should display message saying app works', () => {
