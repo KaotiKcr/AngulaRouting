@@ -1,25 +1,24 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
-import { ProductListComponent } from './product-list.component';
-import { ProductDetailComponent } from './product-detail.component';
-import { ProductDetailGuard } from './product-detail.guard';
+import { NgModule } from "@angular/core";
+import { CommonModule } from "@angular/common";
+import { Routes, RouterModule } from "@angular/router";
+import { ProductListComponent } from "./product-list.component";
+import { ProductDetailComponent } from "./product-detail.component";
+import { ProductDetailGuard } from "./product-detail.guard";
 
+const routes: Routes = [
+	{ path: "products", component: ProductListComponent },
+	{
+		path: "products/:id",
+		component: ProductDetailComponent,
+		canActivate: [ProductDetailGuard]
+	}
+];
 @NgModule({
-  imports: [
-    CommonModule,
-    RouterModule.forChild([
-			{ path: "products", component: ProductListComponent },
-			{
-				path: "products/:id",
-				component: ProductDetailComponent,
-				canActivate: [ProductDetailGuard]
-			}		
-    ]), 
-  ],
-  declarations: [],
-  exports: [
-    RouterModule
-  ]
+	imports: [
+		CommonModule,
+		RouterModule.forChild(routes)
+	],
+	declarations: [],
+	exports: [RouterModule]
 })
-export class ProductRoutingModule { }
+export class ProductRoutingModule {}

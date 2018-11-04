@@ -10,13 +10,13 @@ import { WelcomeComponent } from "./home/welcome.component";
 
 @NgModule({
 	declarations: [
-		AppComponent, 
+		AppComponent,
 		WelcomeComponent
 	],
 	imports: [
-		BrowserModule,		
+		BrowserModule,
 		HttpModule,
-		HttpClientModule,				
+		HttpClientModule,
 		ProductModule,
 		AppRoutingModule
 	],
