@@ -1,19 +1,20 @@
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
-import { RouterModule, Router, Routes } from "@angular/router";
-import { WelcomeComponent } from "./home/welcome.component";
-import { MomentModule } from "angular2-moment";
+import { RouterModule, Routes } from "@angular/router";
 
-const routes: Routes = [
+import { WelcomeComponent } from "./home/welcome.component";
+import { PageNotFoundComponent } from "./page-not-found/page-not-found.component";
+
+
+const ROUTES: Routes = [
 	{ path: "welcome", component: WelcomeComponent },
 	{ path: "", redirectTo: "welcome", pathMatch: "full" },
-	{ path: "**", redirectTo: "welcome", pathMatch: "full" }
+	{ path: "**", component:PageNotFoundComponent  }
 ];
 @NgModule({
 	imports: [
 		CommonModule,
-		RouterModule.forRoot(routes),
-		MomentModule
+		RouterModule.forRoot(ROUTES)
 	],
 	exports: [RouterModule]
 })

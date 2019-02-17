@@ -5,13 +5,14 @@
   "angular-cli": {},
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "ng serve -o",
     "test": "ng test",
     "pree2e": "webdriver-manager update --standalone false --gecko false",
     "e2e": "protractor"
   },
   "private": true,
   "dependencies": {
+    "@angular/animations": "^7.2.5",
     "@angular/cli": "^7.0.3",
     "@angular/common": "^7.0.1",
     "@angular/compiler": "^7.0.1",
@@ -29,7 +30,7 @@
     "rxjs": "^6.3.3",
     "rxjs-compat": "^6.0.0-rc.0",
     "ts-helpers": "^1.1.1",
-    "webpack": "^4.23.1",
+    "webpack": "^4.29.4",
     "zone.js": "^0.8.26"
   },
   "devDependencies": {

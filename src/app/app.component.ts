@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { AuthService } from './user/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +9,22 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'KaotiK';
+
+  get isLoggedIn(): boolean {
+    return this.authService.isLoggedIn;
+  }
+
+  get userName(): string {
+    if (this.authService.currentUser) {
+      return this.authService.currentUser.userName;
+    }
+    return '';
+  }
+
+  constructor(private authService: AuthService, private router:Router) { }
+
+  logout(): void {
+    this.authService.logout();
+    this.router.navigateByUrl('/welcome');
+  }
 }

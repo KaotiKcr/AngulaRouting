@@ -1,6 +1,7 @@
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { Routes, RouterModule } from "@angular/router";
+
 import { ProductListComponent } from "./product-list.component";
 import { ProductDetailComponent } from "./product-detail.component";
 import { ProductDetailGuard } from "./product-detail.guard";
