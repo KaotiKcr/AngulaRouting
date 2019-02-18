@@ -8,6 +8,8 @@ import { ProductEditComponent } from "./product-edit/product-edit.component";
 
 import { ProductDetailGuard } from "./product-detail.guard";
 import { ProductResolver } from "./product-resolver.service";
+import { ProductEditInfoComponent } from "./product-edit/product-edit-info.component";
+import { ProductEditTagsComponent } from "./product-edit/product-edit-tags.component";
 
 const routes: Routes = [
 	{ path: "products", component: ProductListComponent },
@@ -20,7 +22,12 @@ const routes: Routes = [
 	{
 		path: "products/:id/edit",
 		component: ProductEditComponent,
-		resolve: { resolvedData: ProductResolver }
+		resolve: { resolvedData: ProductResolver },
+		children: [
+			{ path: '', redirectTo: 'info', pathMatch:'full'},
+			{ path: 'info', component: ProductEditInfoComponent},
+			{ path: 'tags', component: ProductEditTagsComponent}
+		]
 	}
 ];
 @NgModule({

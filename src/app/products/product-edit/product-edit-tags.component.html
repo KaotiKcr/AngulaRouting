@@ -1,0 +1,49 @@
+<div class="card-body">
+    <form novalidate>
+
+        <div class="field">
+            <label class="label">Category</label>
+            <div class="control">
+                <input class="input is-large" id="categoryId" type="text" placeholder="Category (required)" required
+                    minlength="3" [(ngModel)]=product.category name="category" #categoryVar="ngModel"
+                    [ngClass]="{'is-danger': (categoryVar.touched || categoryVar.dirty) && !categoryVar.valid }" />
+                <span class="has-text-danger">
+                    <span *ngIf="categoryVar.errors?.required">
+                        A category must be entered.
+                    </span>
+                    <span *ngIf="categoryVar.errors?.minlength">
+                        The category must be at least 3 characters in length.
+                    </span>
+                </span>
+            </div>
+        </div>
+        <div class="field">
+            <label class="label">Search Tags</label>
+            <div class="field has-addons">
+                <div class="control is-expanded">
+                    <input class="input is-large" id="tagsId" type="text"
+                        placeholder="Search keywords separated by commas" [(ngModel)]=newTags name="newTags" />
+
+                </div>
+                <div class="control">
+                    <button class="button is-primary is-large" type="button"
+                        title="Enter the search keywords separated by commas and then press Add" (click)="addTags()">
+                        Add
+                    </button>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="field">
+            <div class="tags">
+                <span *ngFor="let tag of product.tags; let i = index" class="tag is-large">
+                    {{tag}}&nbsp;&nbsp;&nbsp;<span class="fa fa-times-circle" (click)="removeTag(i)"></span>
+                </span>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="alert alert-danger" *ngIf="errorMessage">{{errorMessage}}
+</div>
