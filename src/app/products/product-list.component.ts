@@ -17,7 +17,7 @@ export class ProductListComponent implements OnInit {
 	get listFilter() {
 		return this._listFilter;
 	}
-	set listFilter(value: string) {
+	set listFilter(value: string) {		
 		this._listFilter = value;
 		this.filteredProducts = this.listFilter
 			? this.performFilter(this.listFilter)
@@ -28,9 +28,6 @@ export class ProductListComponent implements OnInit {
 	products: IProduct[] = [];
 	constructor(private productService: ProductService, private route: ActivatedRoute) { }
 	ngOnInit(): void {
-		this.listFilter = this.route.snapshot.queryParamMap.get('filterBy') || '';
-		this.showImage = this.route.snapshot.queryParamMap.get('showImage') === 'true';
-
 		this.productService.getProducts().subscribe(
 			products => {
 				this.products = products;
@@ -38,6 +35,9 @@ export class ProductListComponent implements OnInit {
 			},
 			error => (this.errorMessage = <any>error)
 		);
+
+		this.listFilter = this.route.snapshot.queryParamMap.get('filterBy') || '';
+		this.showImage = this.route.snapshot.queryParamMap.get('showImage') === 'true';
 	}
 	toggleImage(): void {
 		this.showImage = !this.showImage;

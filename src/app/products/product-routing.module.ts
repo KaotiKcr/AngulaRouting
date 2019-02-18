@@ -7,17 +7,20 @@ import { ProductDetailComponent } from "./product-detail.component";
 import { ProductEditComponent } from "./product-edit/product-edit.component";
 
 import { ProductDetailGuard } from "./product-detail.guard";
+import { ProductResolver } from "./product-resolver.service";
 
 const routes: Routes = [
 	{ path: "products", component: ProductListComponent },
 	{
 		path: "products/:id",
 		component: ProductDetailComponent,
-		canActivate: [ProductDetailGuard]
+		canActivate: [ProductDetailGuard],
+		resolve: { resolvedData: ProductResolver }
 	},
 	{
 		path: "products/:id/edit",
-		component: ProductEditComponent
+		component: ProductEditComponent,
+		resolve: { resolvedData: ProductResolver }
 	}
 ];
 @NgModule({
