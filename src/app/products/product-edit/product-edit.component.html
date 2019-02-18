@@ -1,0 +1,79 @@
+<section class="hero">
+    <div class="hero-body">
+        <div class="container">
+            <div class="column is-6 is-offset-3">
+                <h3 class="title has-text-grey">{{ pageTitle }}</h3>
+                <div class="box">
+                    <form novalidate #productForm="ngForm">
+                        <div class="field">
+                            <label class="label">Product Name</label>
+                            <div class="control">
+                                <input class="input is-large" id="productNameId" type="text"
+                                    placeholder="Name (required)" required minlength="3" 
+                                    [(ngModel)]=product.productName name="productName" #productNameVar="ngModel"
+                                    [ngClass]="{'is-danger': (productNameVar.touched || productNameVar.dirty) && !productNameVar.valid }" />
+                                <span class="has-text-danger">
+                                    <span *ngIf="productNameVar.errors?.required">
+                                        Product name is required.
+                                    </span>
+                                    <span *ngIf="productNameVar.errors?.minlength">
+                                        Product name must be at least three characters.
+                                    </span>
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <label class="label">Product Code</label>
+                            <div class="control">
+                                <input class="input is-large" id="productCodeId" type="text"
+                                    placeholder="Code (required)" required 
+                                    [(ngModel)]=product.productCode name="productCode" #productCodeVar="ngModel"
+                                    [ngClass]="{'is-danger': (productCodeVar.touched || productCodeVar.dirty) && !productCodeVar.valid }" />
+                                <span class="has-text-danger">
+                                    <span *ngIf="productCodeVar.errors?.required">
+                                        Product code is required.
+                                    </span>
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <label class="label">Description</label>
+                            <div class="control">
+                                <textarea class="input is-large" id="descriptionId" type="text"
+                                    placeholder="Description" rows=3 [(ngModel)]=product.description
+                                    name="description"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="field is-grouped is-grouped-centered">
+                            <p class="control">
+                                <button (click)="saveProduct()" class="button is-primary" type="button"
+                                    [title]="productForm.valid ? 'Save your entered data' : 'Disabled until the form data is valid'"
+                                    [disabled]="!productForm.valid" (click)="saveProduct()">
+                                    Save
+                                </button>
+                            </p>
+                            <p class="control">
+                                <button [routerLink]="['/products']" class="button is-light" type="button" title="Cancel your edits">
+                                    Cancel
+                                </button>
+                            </p>
+                            <p class="control">
+                                <button (click)="deleteProduct()" class="button is-warning" type="button"
+                                    title="Delete this product" (click)="deleteProduct()">
+                                    Delete
+                                </button>
+                            </p>
+                        </div>
+                        <div class="notification  is-danger" *ngIf="errorMessage">{{errorMessage}}
+                            </div>
+                    </form>
+                </div>
+            </div>
+
+            
+        </div>
+    </div>
+</section>
