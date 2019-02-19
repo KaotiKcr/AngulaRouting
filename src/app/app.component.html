@@ -43,11 +43,16 @@
               <a class="nav-link">Welcome {{ userName }}</a>
             </li>
 
-            <li>
-              <a [routerLink]="['/messages']">
+            <li *ngIf="!isMessageDisplayed">
+              <a (click)="displayMessages()">
                 <span>Show Messages</span>
               </a>
             </li>
+            <li *ngIf="isMessageDisplayed">
+                <a (click)="hideMessages()">
+                  <span>Hide Messages</span>
+                </a>
+              </li>
             <li *ngIf="!isLoggedIn">
               <a [routerLink]="['/login']">
                 <span>Log In</span>
@@ -64,6 +69,13 @@
     </div>
   </div>
 </section>
-<section class="container" [@slideInAnimation]="o.isActivated ? o.activatedRoute : ''">
-  <router-outlet #o="outlet"></router-outlet>
+<section class="container">
+  <div class="columns">
+    <div class="column is-three-quarters" [@slideInAnimation]="o.isActivated ? o.activatedRoute : ''">
+      <router-outlet #o="outlet"></router-outlet>
+    </div>
+    <div class="column">
+      <router-outlet name="popup"></router-outlet>
+    </div>
+  </div>
 </section>
