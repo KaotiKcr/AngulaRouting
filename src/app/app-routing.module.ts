@@ -9,12 +9,14 @@ import { PageNotFoundComponent } from "./page-not-found/page-not-found.component
 const ROUTES: Routes = [
 	{ path: "welcome", component: WelcomeComponent },
 	{ path: "", redirectTo: "welcome", pathMatch: "full" },
-	{ path: "**", component:PageNotFoundComponent  }
+	{ path: "**", component:PageNotFoundComponent  }	
 ];
 @NgModule({
 	imports: [
 		CommonModule,
-		RouterModule.forRoot(ROUTES)
+		RouterModule.forRoot(ROUTES
+			//, { enableTracing: true}
+			)		
 	],
 	exports: [RouterModule]
 })

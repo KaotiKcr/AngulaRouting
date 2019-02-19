@@ -1,3 +1,4 @@
+<span class="fa fa-spinner spinner" *ngIf="loading"></span>
 <section class="hero is-info">
   <div class="hero-body">
     <div class="container">
@@ -14,19 +15,19 @@
       <div class="level-left">
         <div class="tabs is-boxed is-centered main-menu">
           <ul>
-            <li>
+            <li routerLinkActive="is-active">
               <a [routerLink]="['/welcome']">
                 <span class="icon is-small"><i class="fa fa-home"></i></span>
                 <span>Home</span>
               </a>
             </li>
-            <li>
+            <li routerLinkActive="is-active" [routerLinkActiveOptions]="{exact: true}">
               <a [routerLink]="['/products']">
                 <span class="icon is-small"><i class="fa fa-list-ul"></i></span>
                 <span>Product List</span>
               </a>
             </li>
-            <li>
+            <li routerLinkActive="is-active">
               <a [routerLink]="['/products', 0, 'edit']">
                 <span class="icon is-small"><i class="fa fa-plus-square"></i></span>
                 <span>Add Product</span>
@@ -39,7 +40,7 @@
         <div class="tabs is-boxed is-centered main-menu">
           <ul>
             <li *ngIf="isLoggedIn">
-                <a class="nav-link">Welcome {{ userName }}</a>
+              <a class="nav-link">Welcome {{ userName }}</a>
             </li>
 
             <li>
@@ -63,6 +64,6 @@
     </div>
   </div>
 </section>
-<section class="container">
-  <router-outlet></router-outlet>
+<section class="container" [@slideInAnimation]="o.isActivated ? o.activatedRoute : ''">
+  <router-outlet #o="outlet"></router-outlet>
 </section>

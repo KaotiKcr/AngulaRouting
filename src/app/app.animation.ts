@@ -1,4 +1,19 @@
-import { trigger, animate, transition, style, group, query } from '@angular/animations';
+import { trigger, animate, transition, style, state, group, query } from '@angular/animations';
+
+export const fadeInAnimation = trigger('fadeInAnimation', [
+    transition('* <=> *', [    
+      query(':enter, :leave', style({ position: 'fixed', opacity: 1 })),
+      group([ 
+        query(':enter', [
+          style({ opacity:0 }),
+          animate('500ms ease-in-out', style({ opacity:1 }))
+        ]),
+        query(':leave', [
+          style({ opacity:1 }),
+          animate('500ms ease-in-out', style({ opacity:0 }))]),
+      ])
+    ])
+  ]);
 
 export const slideInAnimation = trigger('slideInAnimation', [
   // Transition between any two states

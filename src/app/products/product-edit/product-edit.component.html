@@ -6,8 +6,8 @@
                 <div class="box">
                     <div class="tabs is-large">
                         <ul>
-                            <li [routerLink]="['info']" routerLinkActive="is-active"><a>Basic Information</a></li>
-                            <li [routerLink]="['tags']" routerLinkActive="is-active"><a>Search Tags</a></li>
+                            <li [routerLink]="['info']" routerLinkActive="is-active"><a>Basic Information&nbsp;<i [ngClass]="{'fa fa-exclamation has-text-danger' : !isValid('info')}"></i></a></li>
+                            <li [routerLink]="['tags']" routerLinkActive="is-active"><a>Search Tags&nbsp;<i [ngClass]="{'fa fa-exclamation has-text-danger' : !isValid('tags')}"></i></a></li>
                         </ul>
                     </div>
 
