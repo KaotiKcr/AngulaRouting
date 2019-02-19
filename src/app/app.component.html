@@ -49,10 +49,10 @@
               </a>
             </li>
             <li *ngIf="isMessageDisplayed">
-                <a (click)="hideMessages()">
-                  <span>Hide Messages</span>
-                </a>
-              </li>
+              <a (click)="hideMessages()">
+                <span>Hide Messages</span>
+              </a>
+            </li>
             <li *ngIf="!isLoggedIn">
               <a [routerLink]="['/login']">
                 <span>Log In</span>

@@ -1,12 +1,12 @@
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component } from "@angular/core";
+import { Router } from "@angular/router";
 
-import { MessageService } from './message.service';
+import { MessageService } from "./message.service";
 
 @Component({
-  templateUrl: './message.component.html',
+  templateUrl: "./message.component.html",
   styles: [
-    '.message-row { margin-bottom: 10px }'
+    ".message-row { margin-bottom: 10px }"
   ]
 })
 export class MessageComponent {
