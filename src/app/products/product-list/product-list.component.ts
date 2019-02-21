@@ -2,8 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { IProduct } from '../product';
 import { ProductService } from '../product.service';
 import { ActivatedRoute } from '@angular/router';
+
 import { Store, select } from '@ngrx/store';
 import * as fromProduct from '../state/product.reducer';
+import * as productActions from '../state/product.action';
 
 @Component({
 	selector: 'products',
@@ -67,9 +69,6 @@ export class ProductListComponent implements OnInit {
 	}
 
 	checkChanged(value: boolean): void {
-		this.store.dispatch({
-			type: 'TOGGLE_PRODUCT_CODE',
-			payload: value
-		});
+		this.store.dispatch(new productActions.ToggleProductCode(value));
 	}
 }
