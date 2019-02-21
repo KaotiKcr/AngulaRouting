@@ -14,6 +14,9 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 
 import { UserModule } from './user/user.module';
 import { MessageModule } from './messages/message.module';
+import { StoreModule } from '@ngrx/store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { environment } from 'environments/environment.prod';
 
 @NgModule({
 	imports: [
@@ -23,7 +26,13 @@ import { MessageModule } from './messages/message.module';
 		InMemoryWebApiModule.forRoot(ProductData, { delay: 777 }),
 		UserModule,
 		MessageModule,
-		AppRoutingModule
+		AppRoutingModule,
+		StoreModule.forRoot({}),
+		StoreDevtoolsModule.instrument({
+			name: 'KaotiK Demo App',
+			maxAge: 25,
+			logOnly: environment.production
+		})
 	],
 
 	declarations: [AppComponent, WelcomeComponent, PageNotFoundComponent],

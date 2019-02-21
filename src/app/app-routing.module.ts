@@ -24,6 +24,8 @@ const ROUTES: Routes = [
 		RouterModule.forRoot(
 			ROUTES,
 			//, { enableTracing: true}
+
+			// Lazy Loading
 			{ preloadingStrategy: SelectiveStrategy }
 		)
 	],

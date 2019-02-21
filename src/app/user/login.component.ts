@@ -1,16 +1,31 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 
 import { AuthService } from './auth.service';
 import { Router } from '@angular/router';
+import { Store, select } from '@ngrx/store';
 
 @Component({
 	templateUrl: './login.component.html'
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
 	errorMessage: string;
 
-	constructor(private authService: AuthService, private router: Router) {}
+	maskUserName: boolean;
+
+	constructor(
+		private authService: AuthService,
+		private router: Router,
+		private store: Store<any>
+	) {}
+	ngOnInit() {
+		// TODO: Unsubscribe
+		this.store.pipe(select('users')).subscribe(users => {
+			if (users) {
+				this.maskUserName = users.maskUserName;
+			}
+		});
+	}
 
 	login(loginForm: NgForm) {
 		if (loginForm && loginForm.valid) {
@@ -27,5 +42,12 @@ export class LoginComponent {
 		} else {
 			this.errorMessage = 'Please enter a user name and password.';
 		}
+	}
+
+	checkChanged(value: boolean): void {
+		this.store.dispatch({
+			type: 'MASK_USER_NAME',
+			payload: value
+		});
 	}
 }
