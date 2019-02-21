@@ -3,6 +3,7 @@ import { IProduct } from '../product';
 import { ProductService } from '../product.service';
 import { ActivatedRoute } from '@angular/router';
 import { Store, select } from '@ngrx/store';
+import * as fromProduct from '../state/product.reducer';
 
 @Component({
 	selector: 'products',
@@ -31,7 +32,7 @@ export class ProductListComponent implements OnInit {
 	constructor(
 		private productService: ProductService,
 		private route: ActivatedRoute,
-		private store: Store<any>
+		private store: Store<fromProduct.IState>
 	) {}
 	ngOnInit(): void {
 		this.productService.getProducts().subscribe(
@@ -46,11 +47,9 @@ export class ProductListComponent implements OnInit {
 		this.showImage =
 			this.route.snapshot.queryParamMap.get('showImage') === 'true';
 
-		this.store.pipe(select('products')).subscribe(products => {
-			if (products) {
-				this.displayCode = products.showProductCode;
-			}
-		});
+		this.store
+			.pipe(select(fromProduct.getShowProductCode))
+			.subscribe(showProductCode => (this.displayCode = showProductCode));
 	}
 	toggleImage(): void {
 		this.showImage = !this.showImage;

@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 
-import { AuthService } from './auth.service';
+import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
 import { Store, select } from '@ngrx/store';
+import * as fromUser from '../state/user.reducer';
 
 @Component({
 	templateUrl: './login.component.html'
@@ -20,11 +21,9 @@ export class LoginComponent implements OnInit {
 	) {}
 	ngOnInit() {
 		// TODO: Unsubscribe
-		this.store.pipe(select('users')).subscribe(users => {
-			if (users) {
-				this.maskUserName = users.maskUserName;
-			}
-		});
+		this.store
+			.pipe(select(fromUser.getMaskUserName))
+			.subscribe(maskUserName => (this.maskUserName = maskUserName));
 	}
 
 	login(loginForm: NgForm) {
